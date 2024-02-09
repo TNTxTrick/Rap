@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <style>
+      html, body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: url('https://i.imgur.com/4Kci4TR.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        cursor: auto; 
+      }
+
+      .content {
+        position: relative;
+        text-align: center; 
+        background: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        margin: 20px;
+      }
+
+      .icon, .detail {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid blue; 
+        position: relative;
+        z-index: 2;
+        transition: transform 0.4s;
+      }
+      img:hover {
+        transform: scale(1.2);  
+      }
+
+      img:after { 
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: limegreen;
+        bottom: 10px;
+        right: 10px;
+      }
+    a:hover {
+      cursor: url("https://i.imgur.com/IXULuQ1.png"),auto;
+    }
+    h1 {
+      font-size: 2em;
+      transition: transform 0.4s;  
+    }
+
+    h1:hover {
+      transform: scale(1.5);  
+    }
+
+    p {
+      transition: transform 0.3s;  
+    }
+
+    p:hover {
+      transform: scale(1.5);  
+    }
+
+  </style>
+  </head>
+  
+
+<body>
+  <div class="content">
+    <div class="square-gif"></div>
+    <img src="https://i.imgur.com/NRjtp6C.jpg" alt="Profile picture">
+    <h1>Vũ Văn Tuấn</h1>
+    <div class='box'>
+      <div class='row'>
+         <div class='col-2'>
+            <div class='icon'><i class='fab fa-facebook'></i></div>
+            <a href="https://www.facebook.com/tddzs1tg06" target="_blank">Facebook Của Mình</a>
+         </div>
+      </div>
+    </div>
+    <p>Công việc: <span>Là Học Sinh</span></p>
+    <p>Nơi ở:  <span> Hải    Dương</span></p>
+    <p>Time onl: <span id="uptime"></span></p>
+     <p><a href="https://webapi.chaocacbannhe.repl.co/" id="webapi-link">Web Api</a></p>
+    <p id="ip-address">Loading IP...</p>
+
+
+    
+    <script>
+      window.onload = async function() {
+        let response = await fetch('https://api64.ipify.org?format=json');
+        let ipObject = await response.json();
+        document.getElementById('ip-address').textContent = `IP Của Bạn: ${ipObject.ip}`;
+      };
+      document.getElementById('webapi-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        navigator.clipboard.writeText(event.target.href).then(function() {
+          alert('Đã coppy thành công');
+        }).catch(function(error) {
+          alert('Thất bại khi coppy link');
+        });
+      });
+      let pageLoadTime = localStorage.getItem('pageLoadTime');
+
+      if (pageLoadTime === null) {
+        pageLoadTime = new Date().getTime();
+        localStorage.setItem('pageLoadTime', pageLoadTime);
+      }
+      setInterval(() => {
+        const uptimeElement = document.getElementById("uptime");
+        const uptime = Math.floor((new Date().getTime() - pageLoadTime) / 1000);
+        const hours = Math.floor(uptime / 3600);
+        const remainingSeconds = uptime % 3600;
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = remainingSeconds % 60;
+        uptimeElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+      }, 1000);
+
+        </script>
+  </div>
+</body>
+ 
+</html>

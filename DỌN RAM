@@ -1,0 +1,6 @@
+rm -fr modules/commands/cache/*.m4a //dọn rác audio của youtube
+rm -fr modules/commands/cache/*.mp4 //dọn rác video, nên cân nhắc nếu có lưu file mp4 quan trọng
+rm -fr modules/commands/cache/*.mp4
+rm -fr modules/commands/cache/*.png //như mp4, nên cân nhắc
+rm -fr modules/commands/cache/*.jpg //nên câng nhắc
+rm -fr modules/commands/cache/*.gif //nên câng nhắc
